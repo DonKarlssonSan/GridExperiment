@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @RenderSection("stylesheets", required: false)
+
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("scripts", required: false)
+
+</head>
+    <body>
+        <nav>  
+            <ul>
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>  
+                <li>@Html.ActionLink("Asp.Net WebGrid", "", "AspNetGrid")</li>  
+                <li>@Html.ActionLink("Kendo UI Grid", "", "KendoUi")</li>  
+                <li>@Html.ActionLink("Fuel UX Grid", "", "FuelUx")</li>  
+                <li>@Html.ActionLink("jqGrid", "", "JqGrid")</li>  
+            </ul>  
+        </nav>
+        @RenderBody()
+
+        @*@Scripts.Render("~/bundles/jquery")*@
+    </body>
+</html>

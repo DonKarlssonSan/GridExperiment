@@ -1,0 +1,86 @@
+﻿@using GridExperiment.Data
+@using System.Web.Helpers
+
+@model IEnumerable<PodCast>
+
+@section stylesheets
+{
+    <style>
+        .webgrid
+        {
+            width: 100%;
+            border: 0px;
+            border-collapse: collapse;
+            /*border-style: solid;
+            border-width: 1px;*/
+        }
+        .webgrid th
+        {
+            /*background-color: grey;*/ 
+            background-image: none,-webkit-linear-gradient(top,#f6f6f6 0,#eaeaea 100%);
+            background-image: none,-moz-linear-gradient(top,#f6f6f6 0,#eaeaea 100%);
+            background-image: none,-o-linear-gradient(top,#f6f6f6 0,#eaeaea 100%);
+            background-image: none,linear-gradient(to bottom,#f6f6f6 0,#eaeaea 100%);
+            background-position: 50% 50%;
+            margin-bottom:2px;
+            border: 1px solid lightgrey;
+        }
+        .webgrid tfoot td
+        {
+            /*background-color: grey;*/ 
+            background-image: none,-webkit-linear-gradient(top,#f6f6f6 0,#eaeaea 100%);
+            background-image: none,-moz-linear-gradient(top,#f6f6f6 0,#eaeaea 100%);
+            background-image: none,-o-linear-gradient(top,#f6f6f6 0,#eaeaea 100%);
+            background-image: none,linear-gradient(to bottom,#f6f6f6 0,#eaeaea 100%);
+            background-position: 50% 50%;
+            margin-bottom:2px;
+            border: 1px solid lightgrey;
+        }
+        .webgrid td
+        {
+            border-collapse: collapse;
+
+            border: 1px solid lightgrey; 
+            background-color: White;
+        }
+    </style>
+}
+@{
+    ViewBag.Title = "AspNetGrid";
+}
+
+<h2>AspNetGrid</h2>
+<div>
+ 
+    @{
+        WebGrid grid = new WebGrid(
+            source: Model, 
+            defaultSort: "Name",
+            rowsPerPage: ViewBag.RowsPerPage);
+    }
+
+    Set page size:
+    @using (Html.BeginForm("Index", "AspNetGrid"))
+    {
+        <select id="rowsperpage" name="rowsperpage">
+            <option value="5">5</option>
+            <option selected="selected" value="10">10</option>
+        </select>
+        <input type="submit" value="Update" />
+    }
+ 
+    @grid.GetHtml(
+        columns: grid.Columns(
+            grid.Column("Name"),
+            grid.Column("Url"),
+            grid.Column("EpisodeCount"),
+            grid.Column("Language")
+            ),
+        mode: WebGridPagerModes.All,
+        tableStyle: "webgrid"
+        //headerStyle: "webgrid-header",
+        //footerStyle: "webgrid-footer"
+    )
+    @*@{ grid.RowsPerPage = 10; }*@
+
+</div>

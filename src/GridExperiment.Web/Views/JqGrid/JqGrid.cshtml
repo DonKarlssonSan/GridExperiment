@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "JqGrid";
+}
+
+@section stylesheets
+{
+    <link href="@Url.Content("/Content/themes/base/jquery-ui.css")" rel="stylesheet" />
+    <link href="@Url.Content("/Content/jquery.jqGrid/ui.jqgrid.css")" rel="stylesheet" />
+}
+
+@section scripts
+{
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/i18n/grid.locale-en.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/jquery.jqGrid.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/Data/CommonJsData.js")"></script>
+}
+<h2>JqGrid</h2>
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function () {
+
+        $("#grid").jqGrid({
+            datatype: "local",
+            data: podCasts,
+            colNames:['Name','Url', 'EpisodeCount', 'Language'],
+            colModel:[
+                {name: 'Name', index: 'Name'},
+                {name: 'Url', index: 'Url' },
+                {name: 'EpisodeCount', index: 'EpisodeCount', sorttype: 'int', formatter:'number', align:"right"},
+                {name: 'Language', index: 'Language' }
+            ],
+            rowNum: 10,
+            rowList: [5,10],
+            pager: '#pager',
+            sortname: 'Name',
+            viewrecords: true,
+            sortorder: "desc",
+            caption:"Developer Pod Casts",
+            height: "100%",
+            autowidth: true
+        }).jqGrid('navGrid','#pager',{add:false,edit:false,del:false});
+    });
+</script>
+<table id="grid"><tr><td/></tr></table>
+<div id="pager"/>

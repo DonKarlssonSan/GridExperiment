@@ -1,0 +1,27 @@
+﻿@using MvcJqGrid
+@using MvcJqGrid.Enums
+@{
+    ViewBag.Title = "MvcJqGrid";
+}
+
+@section scripts
+{
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/jquery.jqGrid.js")"></script>
+}
+<h2>MvcJqGrid</h2>
+
+@(Html.Grid("Basic")
+      .SetCaption("Basic Grid")
+      .AddColumn(new Column("Name"))
+      .AddColumn(new Column("Url"))
+      .AddColumn(new Column("EpisodeCount"))
+      .AddColumn(new Column("Language"))
+      .SetDataType(DataType.ClientSide)
+      
+      .SetUrl(@Url.Content("/Scripts/Data/JqGridJsData.js"))
+      .SetAutoWidth(true)
+      .SetRowNum(10)
+      .SetRowList(new[]{10,15,20,50})
+      .SetViewRecords(true)
+      .SetPager("pager"))

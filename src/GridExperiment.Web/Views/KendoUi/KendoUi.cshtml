@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Kendo UI";
+}
+
+@section stylesheets
+{
+    <!-- Common Kendo UI Web CSS -->
+    <link href="@Url.Content("/Content/kendo/2013.1.319/kendo.common.min.css")" rel="stylesheet" />
+    <!-- Default Kendo UI Web theme CSS -->
+    <link href="@Url.Content("/Content/kendo/2013.1.319/kendo.default.min.css")" rel="stylesheet" />
+}
+@section scripts
+{
+
+    <script type="text/javascript" src="@Url.Content("/Scripts/kendo/2013.1.319/jquery.min.js")"></script>
+    @* Individual parts of Kendo UI could be included but that becomes a long list if you need functionality 
+       like grouping, sorting, reordering, selecting etc. We include the whole thing: kendo.web *@
+    <script type="text/javascript" src="@Url.Content("/Scripts/kendo/2013.1.319/kendo.web.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/Data/CommonJsData.js")"></script>
+}
+<h2>Kendo UI</h2>
+
+Set page size: <input id="comboBox" />
+<div id="grid"></div>
+
+@*<div id="grid" style="width: 100%; height: 100%;">
+</div>*@
+
+@*<div id="grid" style="position: absolute; top: 0; left: 0;">
+</div>*@
+
+
+<script type="text/javascript">
+    
+
+    $(document).ready(function(){
+        $("#comboBox").kendoComboBox({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: 5 },
+                { text: 10 }
+            ],
+            index: 1,
+            change: function (e) {
+                var grid = $("#grid").data("kendoGrid");
+                grid.dataSource.pageSize(this.value());
+            }
+        });
+        $("#grid").kendoGrid({
+            reorderable: true,
+            groupable: true,
+            sortable: true,
+            selectable: true,
+            filterable: true,
+            pageable: {
+                pageSize: 10
+            },
+            dataSource: {
+                data: podCasts
+            }
+        });
+    });
+    
+//Making the Grid 100% high and auto resizable
+    //$(window).bind("resize", function () {
+    //    var gridElement = $("#grid"),
+    //        newHeight = gridElement.innerHeight(),
+    //        otherElements = gridElement.children().not(".k-grid-content"),
+    //        otherElementsHeight = 0;
+
+    //    otherElements.each(function () {
+    //        otherElementsHeight += $(this).outerHeight();
+    //    });
+
+    //    gridElement.children(".k-grid-content").height(newHeight - otherElementsHeight);
+    //});
+</script>
+@*@(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
+      .Name("grid")
+      .Columns(columns =>
+      {
+          // Create a column bound to the ProductID property
+          columns.Bound(product => product.ProductID);
+          // Create a column bound to the ProductName property
+          columns.Bound(product => product.ProductName);
+          // Create a column bound to the UnitsInStock property
+          columns.Bound(product => product.UnitsInStock);
+      })
+      .Pageable() // Enable paging
+      .Sortable() // Enable sorting
+)*@

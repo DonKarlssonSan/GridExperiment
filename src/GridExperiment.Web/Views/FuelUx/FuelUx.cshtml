@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Fuel UX";
+}
+
+@section stylesheets
+{
+    <link href="http://fuelcdn.com/fuelux/2.3/css/fuelux.css" rel="stylesheet" />
+    <link href="http://fuelcdn.com/fuelux/2.3/css/fuelux-responsive.css" rel="stylesheet" />
+}
+
+@section scripts
+{
+    @*<script type="text/javascript" src="http://fuelcdn.com/fuelux/2.3/all.min.js"></script>*@
+    <script type="text/javascript" src="@Url.Content("/Scripts/Data/CommonJsData.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/Data/FuelUxJsData.js")"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript"src="http://fuelcdn.com/fuelux/2.3/loader.min.js"></script>
+    @*underscore.js is required for sorting and searching*@
+    <script type="text/javascript"src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+    
+}
+
+@*The class="fuelux" here is important, other wise the Fuel UX css is not applied*@
+<div class="fuelux">
+    <h2>Fuel UX Grid</h2>
+
+    <table id="grid" class="table table-bordered datagrid">
+		<thead>
+		<tr>
+			<th>
+				<span class="datagrid-header-title">Pod Casts</span>
+				<div class="datagrid-header-left"></div>
+				<div class="datagrid-header-right">
+					<div class="input-append search">
+						<input type="text" class="input-medium" placeholder="Search"><button class="btn"><i class="icon-search"></i></button>
+					</div>
+				</div>
+			</th>
+		</tr>
+		</thead>
+
+		<tfoot>
+		<tr>
+			<th>
+				<div class="datagrid-footer-left" style="display:none;">
+					<div class="grid-controls">
+						<span><span class="grid-start"></span> - <span class="grid-end"></span> of <span class="grid-count"></span></span>
+						<select class="grid-pagesize"><option>10</option><option>5</option></select>
+						<span>Per Page</span>
+					</div>
+				</div>
+				<div class="datagrid-footer-right" style="display:none;">
+					<div class="grid-pager">
+						<button class="btn grid-prevpage"><i class="icon-chevron-left"></i></button>
+						<span>Page</span>
+						<div class="input-append dropdown combobox">
+							<input class="span1" type="text">
+						</div>
+						<span>of <span class="grid-pages"></span></span>
+						<button class="btn grid-nextpage"><i class="icon-chevron-right"></i></button>
+					</div>
+				</div>
+			</th>
+		</tr>
+		</tfoot>
+	</table>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $('#grid').datagrid(
+            {
+                dataSource: podCastsFuelUx
+                //,stretchHeight: true
+            });
+    });
+    
+</script>
